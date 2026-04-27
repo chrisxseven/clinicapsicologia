@@ -39,6 +39,9 @@ public class Paciente implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataCadastro;
 
+    @Column(name = "tipo_terapia")
+    private String tipoTerapia;
+
     public Long getId() {
         return id;
     }
@@ -93,6 +96,14 @@ public class Paciente implements Serializable {
 
     public void setDataCadastro(LocalDate dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    public String getTipoTerapia() {
+        return tipoTerapia;
+    }
+
+    public void setTipoTerapia(String tipoTerapia) {
+        this.tipoTerapia = tipoTerapia;
     }
 }
 
