@@ -73,13 +73,8 @@ public class AuthController {
             u.setEmail(body.get("email"));
             u.setSenha(passwordEncoder.encode(body.get("senha")));
 
-            // Define a role: se informada na requisição, usa essa; senão, padrão é "USER"
-            String role = body.getOrDefault("role", "USER").toUpperCase();
-
-            // Validação: apenas "USER" ou "ADMIN" são permitidas
-            if (!role.equals("USER") && !role.equals("ADMIN")) {
-                return ResponseEntity.badRequest().body(Map.of("erro", "Role inválida. Use 'USER' ou 'ADMIN'."));
-            }
+            // Registro publico sempre cria usuario comum.
+            String role = "USER";
 
             u.setRole(role);
             usuarioRepository.save(u);

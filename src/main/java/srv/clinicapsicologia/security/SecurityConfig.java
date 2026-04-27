@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/auth/login", "/auth/registro").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
@@ -63,7 +63,7 @@ public class SecurityConfig {
         return email -> usuarioRepository.findByEmail(email)
                 .map(u -> User.withUsername(u.getEmail())
                         .password(u.getSenha())
-                        .roles(u.getRole())
+                        .roles("USER")
                         .build())
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + email));
     }
