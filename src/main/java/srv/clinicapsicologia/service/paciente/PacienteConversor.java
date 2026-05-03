@@ -27,6 +27,7 @@ public class PacienteConversor {
             paciente.setDataCadastro(pacienteResource.getDataCadastro());
             paciente.setDataNascimento(pacienteResource.getDataNascimento());
             paciente.setTipoTerapia(pacienteResource.getTipoTerapia());
+            paciente.setDataAgendamento(pacienteResource.getDataAgendamento());
 
             return paciente;
 

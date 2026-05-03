@@ -1,8 +1,14 @@
 package srv.clinicapsicologia.resource.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class PacienteResource {
 
@@ -24,16 +30,23 @@ public class PacienteResource {
     @JsonProperty("data_cadastro")
     private LocalDate dataCadastro;
 
+    @JsonProperty("data_agendamento")
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
+    private LocalDateTime dataAgendamento;
+
     @JsonProperty("tipo_terapia")
     private String tipoTerapia;
 
-    public PacienteResource(String nome, LocalDate data_nascimento, String cpf, String telefone, LocalDate data_cadastro, String tipo_terapia) {
+    public PacienteResource(String nome, LocalDate data_nascimento, String cpf, String telefone, LocalDate data_cadastro, LocalDateTime data_agendamento, String tipo_terapia) {
         this.nome = nome;
         this.idPaciente = idPaciente;
         this.dataNascimento = data_nascimento;
         this.cpfPaciente = cpf;
         this.telefone = telefone;
         this.dataCadastro = data_cadastro;
+        this.dataAgendamento = data_agendamento;
         this.tipoTerapia = tipo_terapia;
     }
 
@@ -85,6 +98,14 @@ public class PacienteResource {
         this.dataCadastro = dataCadastro;
     }
 
+    public LocalDateTime getDataAgendamento() {
+        return dataAgendamento;
+    }
+
+    public void setDataAgendamento(LocalDateTime dataAgendamento) {
+        this.dataAgendamento = dataAgendamento;
+    }
+
     public String getTipoTerapia() {
         return tipoTerapia;
     }
@@ -102,6 +123,7 @@ public class PacienteResource {
                 ", cpfPaciente='" + cpfPaciente + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", dataCadastro=" + dataCadastro +
+                ", dataAgendamento=" + dataAgendamento +
                 ", tipoTerapia='" + tipoTerapia + '\'' +
                 '}';
     }
