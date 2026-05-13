@@ -23,27 +23,24 @@ public class PsicologaController {
 
     @Autowired
     private BuscarPsicologaPorIdService serviceBuscarPorId;
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @GetMapping(path = "/psicologas")
     public List<Psicologa> buscarPsicologas() {
         return serviceBuscar.buscarTodasAsPsicologas();
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(path = "/psicologa/id/{id}")
     public Psicologa buscarPsicologaPorId(
             @PathVariable (name = "id", required = true) Long id) throws PsicologaNotFoundException {
         return serviceBuscarPorId.buscarPorId(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(path = "/psicologa/save")
     public void salvarPsicologa(@RequestBody PsicologaResource psicologa) {
         serviceCadastro.cadastro(psicologa);
 
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping(path = "psicologa/delete/{id}")
     public void deletarPsicologa(@PathVariable (name = "id", required = true) Long id) throws PsicologaNotFoundException {
         serviceBuscarPorId.deletarPorId(id);

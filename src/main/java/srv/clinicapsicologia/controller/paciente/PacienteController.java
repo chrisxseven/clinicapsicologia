@@ -38,14 +38,12 @@ public class PacienteController {
         return serviceBuscarPorId.buscarPorId(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(path = "paciente/save")
     public void salvarPaciente(@RequestBody PacienteResource paciente) {
         serviceCadastro.cadastro(paciente);
 
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping(path = "paciente/editar/{id}")
     public void atualizarPaciente(
             @PathVariable(name = "id", required = true) Long id,
@@ -53,7 +51,6 @@ public class PacienteController {
         serviceEditarPaciente.atualizarPaciente(id, paciente);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping(path = "paciente/delete/{id}")
     public void deletarPaciente(@PathVariable (name = "id", required = true) Long id) throws PacienteNotFoundException {
         serviceBuscarPorId.deletarPorId(id);
