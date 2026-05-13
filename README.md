@@ -6,7 +6,8 @@
 ![JWT](https://img.shields.io/badge/Security-JWT-black.svg)
 ![Architecture](https://img.shields.io/badge/Architecture-MVC-yellow.svg)
 
-## Link: (https://cognisyss.netlify.app)
+## Produção: https://cognisyss.netlify.app
+
 ## 📌 Sobre o Projeto
 
 O **Clínica Psicológica API** é o backend de um sistema de gerenciamento de clínicas de psicologia. Desenvolvido como projeto acadêmico, o sistema visa digitalizar e organizar o fluxo de pacientes e profissionais, garantindo segurança no acesso aos dados sensíveis através de autenticação por tokens.
