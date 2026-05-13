@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "pacientes")
@@ -38,6 +39,10 @@ public class Paciente implements Serializable {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataCadastro;
+
+    @Column(name = "data_agendamento")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
+    private LocalDateTime dataAgendamento;
 
     @Column(name = "tipo_terapia")
     private String tipoTerapia;
@@ -98,6 +103,14 @@ public class Paciente implements Serializable {
         this.dataCadastro = dataCadastro;
     }
 
+    public LocalDateTime getDataAgendamento() {
+        return dataAgendamento;
+    }
+
+    public void setDataAgendamento(LocalDateTime dataAgendamento) {
+        this.dataAgendamento = dataAgendamento;
+    }
+
     public String getTipoTerapia() {
         return tipoTerapia;
     }
@@ -106,4 +119,3 @@ public class Paciente implements Serializable {
         this.tipoTerapia = tipoTerapia;
     }
 }
-

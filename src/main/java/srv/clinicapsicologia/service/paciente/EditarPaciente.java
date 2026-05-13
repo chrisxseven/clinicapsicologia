@@ -30,6 +30,7 @@ public class EditarPaciente {
             existente.setCpfPaciente(pacienteResource.getCpfPaciente());
             existente.setTelefone(pacienteResource.getTelefone());
             existente.setDataNascimento(pacienteResource.getDataNascimento());
+            existente.setDataAgendamento(pacienteResource.getDataAgendamento());
             existente.setTipoTerapia(pacienteResource.getTipoTerapia());
 
             pacienteRepository.saveAndFlush(existente);
