@@ -46,6 +46,10 @@ public class Paciente implements Serializable {
     @JoinColumn(name = "psicologo_id")
     private Usuario psicologo;
 
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private StatusPaciente status = StatusPaciente.ATIVO;
+
     public Long getId() {
         return id;
     }
@@ -123,5 +127,9 @@ public class Paciente implements Serializable {
     }
     public void setPsicologo(Usuario psicologo) {
         this.psicologo = psicologo;
+    }
+
+    public StatusPaciente getStatus() {
+        return status;
     }
 }
