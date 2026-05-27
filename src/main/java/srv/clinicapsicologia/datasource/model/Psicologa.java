@@ -1,11 +1,6 @@
 package srv.clinicapsicologia.datasource.model;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -29,8 +24,16 @@ public class Psicologa implements Serializable{
     @Column(name = "id_psicologa")
     private Long idPsicologa;
 
+    @OneToOne
+    @JoinColumn(name = "usuario_id", unique = true)
+    private Usuario usuario;
+
     public Psicologa() {
 
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getNome() {
@@ -55,5 +58,12 @@ public class Psicologa implements Serializable{
 
     public void setIdPsicologa(Long idPsicologa) {
         this.idPsicologa = idPsicologa;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

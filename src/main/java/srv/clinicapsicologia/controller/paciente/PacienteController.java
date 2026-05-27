@@ -1,7 +1,12 @@
 package srv.clinicapsicologia.controller.paciente;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import srv.clinicapsicologia.datasource.model.Paciente;
+import srv.clinicapsicologia.datasource.model.Usuario;
 import srv.clinicapsicologia.exception.PacienteNotFoundException;
+import srv.clinicapsicologia.repository.PacienteRepository;
+import srv.clinicapsicologia.repository.UsuarioRepository;
 import srv.clinicapsicologia.resource.model.PacienteResource;
 import srv.clinicapsicologia.service.paciente.BuscarPacientePorId;
 import srv.clinicapsicologia.service.paciente.BuscarPacienteService;
@@ -26,6 +31,12 @@ public class PacienteController {
 
     @Autowired
     private BuscarPacientePorId serviceBuscarPorId;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PacienteRepository pacienteRepository;
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(path = "pacientes")
@@ -54,5 +65,15 @@ public class PacienteController {
     @DeleteMapping(path = "paciente/delete/{id}")
     public void deletarPaciente(@PathVariable (name = "id", required = true) Long id) throws PacienteNotFoundException {
         serviceBuscarPorId.deletarPorId(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(path = "pacientes/meus")
+    @PreAuthorize("hasRole('PSICOLOGO')")
+    public List<Paciente> meusPacientes(Authentication auth) {
+        String email = auth.getName();
+        Usuario psicologo = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Psicólogo não encontrado"));
+        return pacienteRepository.findByPsicologoId(psicologo.getId());
     }
 }
