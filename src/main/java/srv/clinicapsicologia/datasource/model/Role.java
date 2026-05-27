@@ -1,5 +1,8 @@
 package srv.clinicapsicologia.datasource.model;
 
 public enum Role {
-    SUPERADMIN, ADMIN, PSICOLOGO
+    SUPERADMIN,
+    ADMIN,
+    PSICOLOGO,
+    USER
 }
