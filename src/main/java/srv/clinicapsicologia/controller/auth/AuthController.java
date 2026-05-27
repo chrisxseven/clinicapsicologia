@@ -34,6 +34,7 @@ public class AuthController {
             authManager.authenticate(
                     new UsernamePasswordAuthenticationToken(body.get("email"), body.get("senha"))
             );
+
             String token = jwtService.gerarToken(body.get("email"));
 
             Usuario usuario = usuarioRepository.findByEmail(body.get("email"))
@@ -47,6 +48,9 @@ public class AuthController {
 
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(401).body(Map.of("erro", "Email ou senha inválidos."));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(Map.of("erro", "Erro interno no servidor: " + e.getMessage()));
         }
     }
 
