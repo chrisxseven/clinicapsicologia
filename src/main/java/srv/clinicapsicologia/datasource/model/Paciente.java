@@ -1,12 +1,7 @@
 package srv.clinicapsicologia.datasource.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -47,6 +42,10 @@ public class Paciente implements Serializable {
     @Column(name = "tipo_terapia")
     private String tipoTerapia;
 
+    @ManyToOne
+    @JoinColumn(name = "psicologo_id")
+    private Usuario psicologo;
+
     public Long getId() {
         return id;
     }
@@ -67,7 +66,7 @@ public class Paciente implements Serializable {
         return idPaciente;
     }
 
-    public void setIdPaciente(Long id) {
+    public void setIdPaciente(Long idPaciente) {
         this.idPaciente = idPaciente;
     }
 
@@ -117,5 +116,12 @@ public class Paciente implements Serializable {
 
     public void setTipoTerapia(String tipoTerapia) {
         this.tipoTerapia = tipoTerapia;
+    }
+
+    public Usuario getPsicologo() {
+        return psicologo;
+    }
+    public void setPsicologo(Usuario psicologo) {
+        this.psicologo = psicologo;
     }
 }

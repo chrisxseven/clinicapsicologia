@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/psi")
@@ -25,8 +26,17 @@ public class PsicologaController {
     private BuscarPsicologaPorIdService serviceBuscarPorId;
 
     @GetMapping(path = "/psicologas")
-    public List<Psicologa> buscarPsicologas() {
-        return serviceBuscar.buscarTodasAsPsicologas();
+    public List<Map<String, Object>> buscarPsicologas() {
+        return serviceBuscar.buscarTodasAsPsicologas().stream()
+                .map(p -> {
+                    Map<String, Object> dto = new java.util.HashMap<>();
+                    dto.put("id", p.getId());
+                    dto.put("nome", p.getNome());
+                    dto.put("crPsi", p.getCrPsi());
+                    dto.put("usuarioId", p.getUsuario() != null ? p.getUsuario().getId() : null);
+                    return dto;
+                })
+                .collect(java.util.stream.Collectors.toList());
     }
 
     @GetMapping(path = "/psicologa/id/{id}")

@@ -1,5 +1,6 @@
 package srv.clinicapsicologia.controller.auth;
 
+import srv.clinicapsicologia.datasource.model.Role;
 import srv.clinicapsicologia.datasource.model.Usuario;
 import srv.clinicapsicologia.repository.UsuarioRepository;
 import srv.clinicapsicologia.security.JwtService;
@@ -40,7 +41,8 @@ public class AuthController {
 
             return ResponseEntity.ok(Map.of(
                     "token", token,
-                    "nome", usuario.getNome()
+                    "nome", usuario.getNome(),
+                    "role",  usuario.getRole().name()
             ));
 
         } catch (BadCredentialsException e) {
@@ -75,12 +77,12 @@ public class AuthController {
             // Registro publico sempre cria usuario comum.
             String role = "USER";
 
-            u.setRole(role);
+            u.setRole(Role.PSICOLOGO);
             usuarioRepository.save(u);
 
             return ResponseEntity.ok(Map.of(
                     "mensagem", "Usuário criado com sucesso.",
-                    "role", role,
+                    "role",  u.getRole().name(),
                     "nome", u.getNome(),
                     "email", u.getEmail()
             ));

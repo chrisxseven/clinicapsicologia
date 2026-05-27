@@ -64,7 +64,7 @@ public class SecurityConfig {
         return email -> usuarioRepository.findByEmail(email)
                 .map(u -> User.withUsername(u.getEmail())
                         .password(u.getSenha())
-                        .roles("USER")
+                        .roles(u.getRole().name())
                         .build())
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + email));
     }

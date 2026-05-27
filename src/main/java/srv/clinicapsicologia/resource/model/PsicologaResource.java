@@ -13,10 +13,14 @@ public class PsicologaResource {
     @JsonProperty("id_psicologa")
     private String idPsicologa;
 
-    public PsicologaResource(String nome, String crPsi, String idPsicologa) {
+    @JsonProperty("email")
+    private String email;
+
+    public PsicologaResource(String nome, String crPsi, String idPsicologa, String email) {
         this.nome = nome;
         this.crPsi = crPsi;
         this.idPsicologa = idPsicologa;
+        this.email = email;
     }
 
     public String getNome() {
@@ -41,8 +45,11 @@ public class PsicologaResource {
         this.idPsicologa = idPsicologa;
     }
 
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
     @Override
     public String toString() {
-        return "PsicologaResource [nome=" + nome + ", crPsi=" + crPsi + ", idPsicologa=" + idPsicologa + "]";
+        return "PsicologaResource [nome=" + nome + ", crPsi=" + crPsi + ", idPsicologa=" + idPsicologa + ", email=" + email + "]";
     }
 }

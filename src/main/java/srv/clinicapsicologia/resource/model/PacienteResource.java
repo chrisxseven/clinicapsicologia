@@ -39,6 +39,9 @@ public class PacienteResource {
     @JsonProperty("tipo_terapia")
     private String tipoTerapia;
 
+    @JsonProperty("psicologoId")
+    private Long psicologoId;
+
     public PacienteResource(String nome, LocalDate data_nascimento, String cpf, String telefone, LocalDate data_cadastro, LocalDateTime data_agendamento, String tipo_terapia) {
         this.nome = nome;
         this.idPaciente = idPaciente;
@@ -114,6 +117,10 @@ public class PacienteResource {
         this.tipoTerapia = tipoTerapia;
     }
 
+    public Long getPsicologoId() { return psicologoId; }
+
+    public void setPsicologoId(Long psicologoId) { this.psicologoId = psicologoId; }
+
     @Override
     public String toString() {
         return "PacienteResource{" +
@@ -125,6 +132,7 @@ public class PacienteResource {
                 ", dataCadastro=" + dataCadastro +
                 ", dataAgendamento=" + dataAgendamento +
                 ", tipoTerapia='" + tipoTerapia + '\'' +
+                ", psicologoId=" + psicologoId +
                 '}';
     }
 }
